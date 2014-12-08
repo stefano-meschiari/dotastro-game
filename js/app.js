@@ -15,7 +15,10 @@ Backbone.ROComputedModel = Backbone.Model.extend({
     }    
 });
 
-var App = Backbone.ROComputedModel.extend({});
+var App = Backbone.ROComputedModel.extend({
+    
+
+});
 app = new App();
 
 var AppView = Backbone.View.extend({

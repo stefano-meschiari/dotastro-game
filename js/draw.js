@@ -2,6 +2,7 @@
 
 var GameCanvas = Backbone.View.extend({
     STAR_SIZE: 100,
+    AU_PER_PIXEL: 100,
     
     initialize: function() {
 
@@ -35,7 +36,6 @@ var GameCanvas = Backbone.View.extend({
     
     resize: function() {
         this.star.position = view.center;
-        console.log(view.center, this.star.center);
     },
 
     frame: function() {

@@ -38,6 +38,14 @@
     
     <script type="text/javascript" src="bower_components/paper/dist/paper-full.min.js"></script>
 
+
+    <script type="text/javascript" src="js/defines.js"></script>
+    <script type="text/javascript" src="js/units.js"></script>    
+    <script type="text/javascript" src="js/math.js"></script>    
+    <script type="text/javascript" src="js/physics.js"></script>    
+
+    <script type="text/javascript" src="js/app.js"></script>
+
     <script type="text/paperscript" canvas="canvas" src="js/draw.js"></script></script>
 
 
