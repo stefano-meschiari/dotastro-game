@@ -1,8 +1,8 @@
-
-
 var GameCanvas = Backbone.View.extend({
     STAR_SIZE: 100,
     AU_PER_PIXEL: 100,
+
+    planetItems: [],
     
     initialize: function() {
 
@@ -31,15 +31,12 @@ var GameCanvas = Backbone.View.extend({
 
         this.star = star;        
     },
-
-    
     
     resize: function() {
         this.star.position = view.center;
     },
 
     frame: function() {
-        // Put animation-related code here
     }
     
 });
@@ -48,3 +45,4 @@ gameCanvas = new GameCanvas({ model: app });
 
 onResize = _.bind(gameCanvas.resize, gameCanvas);
 onFrame = _.bind(gameCanvas.frame, gameCanvas);
+onMouseDown = _.bind(gameCanvas.mouseDown, gameCanvas);

@@ -15,10 +15,29 @@ Backbone.ROComputedModel = Backbone.Model.extend({
     }    
 });
 
-var App = Backbone.ROComputedModel.extend({
-    
 
+
+var App = Backbone.ROComputedModel.extend({
+    planets: [],
+
+    addPlanet: function(x, y) {
+        var r = Math.sqrt(x*x + y*y);
+        var v_circ = Math.sqrt(K2/r);
+        
+        planets.push({
+            x: x,
+            y: y,
+            z: 0,
+            u: x/r,
+            v: -y/r,
+            w: 0
+        });
+
+        app.trigger('add:planet');
+    }
+    
 });
+
 app = new App();
 
 var AppView = Backbone.View.extend({

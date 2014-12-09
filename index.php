@@ -9,7 +9,7 @@
     <title>.Astronomy game template</title>
     <meta name="description" content="We shall see, shan't we?">
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, maximum-scale=1.0, minimal-ui">
-    
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" href="css/main.css">
     
     <script src="bower_components/modernizer/modernizr.js"></script>        
@@ -25,10 +25,6 @@
       <div id="canvas-container">
         <canvas id="canvas" resize keepalive="true"></canvas>
       </div>
-
-      <div id="right-sidebar">
-        Info, params, etc.
-      </div>
     </div>
 
 
@@ -37,7 +33,7 @@
     <script type="text/javascript" src="bower_components/backbone/backbone.js"></script>
     
     <script type="text/javascript" src="bower_components/paper/dist/paper-full.min.js"></script>
-
+    <script type="text/javascript" src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 
     <script type="text/javascript" src="js/defines.js"></script>
     <script type="text/javascript" src="js/units.js"></script>    

@@ -12,3 +12,8 @@ var NCOORDS = 10;
 var NPHYS = 3;
 var NSUB = 8;
 
+// UI constants
+var PAUSED = 0;
+var RUNNING = 1;
+var MENU = 2;
+var ROTATABLE = 3;
