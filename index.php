@@ -29,6 +29,9 @@
         <canvas id="canvas" class="full-size" keepalive="true"></canvas>
       </div>
     </div>
+    <div style="display:none">
+      <img src="img/Pearth.png" id="earth">
+    </div>
 
 
     <script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
@@ -48,8 +51,9 @@
 
     <script type="text/javascript" src="js/app.js"></script>
 
+
     <script type="text/paperscript" canvas="top-canvas" src="js/draw_graph.js"></script>
-    <script type="text/paperscript" canvas="canvas" src="js/draw_br.js"></script>
+    <script type="text/paperscript" canvas="canvas" src="js/draw.js"></script>
 
   </body>
 </html>
