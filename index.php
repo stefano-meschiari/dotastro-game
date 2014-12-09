@@ -38,6 +38,9 @@
     <script type="text/javascript" src="bower_components/paper/dist/paper-full.min.js"></script>
     <script type="text/javascript" src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 
+    <script type="text/javascript" src="highcharts/highcharts.js"></script>
+    <script type="text/javascript" src="highcharts/exporting.js"></script> 
+    
     <script type="text/javascript" src="js/defines.js"></script>
     <script type="text/javascript" src="js/units.js"></script>    
     <script type="text/javascript" src="js/math.js"></script>    
@@ -45,6 +48,7 @@
 
     <script type="text/javascript" src="js/app.js"></script>
 
+    <script type="text/paperscript" canvas="top-canvas" src="js/draw_graph.js"></script>
     <script type="text/paperscript" canvas="canvas" src="js/draw_br.js"></script>
 
   </body>
