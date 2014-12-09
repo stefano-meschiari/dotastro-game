@@ -21,9 +21,12 @@
     <![endif]-->
 
 
-    <div id="app" class="full-size">
-      <div id="canvas-container">
-        <canvas id="canvas" resize keepalive="true"></canvas>
+    <div id="app">
+      <div id="top-layer">
+        <canvas id="top-canvas" class="full-size" keepalive="true"></canvas>
+      </div>
+      <div id="bottom-layer">
+        <canvas id="canvas" class="full-size" keepalive="true"></canvas>
       </div>
     </div>
 
@@ -42,9 +45,7 @@
 
     <script type="text/javascript" src="js/app.js"></script>
 
-    <script type="text/paperscript" canvas="canvas" src="js/draw.js"></script></script>
-
-
+    <script type="text/paperscript" canvas="canvas" src="js/draw_br.js"></script>
 
   </body>
 </html>

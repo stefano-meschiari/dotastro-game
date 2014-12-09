@@ -18,27 +18,49 @@ Backbone.ROComputedModel = Backbone.Model.extend({
 
 
 var App = Backbone.ROComputedModel.extend({
-    planets: [],
+    t: 0,
+    dt: 0.5,
+    x: [0, 0, 0],
+    // initial velocity of the star (AU/day). The vector contains the 3
+    // velocity components for each body, (v_x^0, v_y^0, v_z^0, v_x^1, v_y^1, v_z^1, ...),
+    // so that the are 3*nplanets components.
+    v: [0, 0, 0],
+    // initial mass of the star (MSUN). The vector contains the masses of
+    // all the bodies in the system.
+    M: [1],
+    
+    nplanets: function() {
+        return this.M.length-1;
+    },
 
+    coords: function(n) {
+        return [this.x[n*NPHYS+X], this.x[n*NPHYS+Y], this.x[n*NPHYS+Z]];
+    },
+
+    vels: function(n) {
+        return [this.v[n*NPHYS+X], this.v[n*NPHYS+Y], this.v[n*NPHYS+Z]];
+    },
+    
     addPlanet: function(x, y) {
         var r = Math.sqrt(x*x + y*y);
         var v_circ = Math.sqrt(K2/r);
         
-        planets.push({
-            x: x,
-            y: y,
-            z: 0,
-            u: x/r,
-            v: -y/r,
-            w: 0
-        });
+        this.x.push(x, y, 0);
+        this.v.push(-v_circ * y/r, v_circ * x/r, 0);
+        this.M.push(0);
 
+        console.log(this);
         app.trigger('add:planet');
+    },
+
+    tick: function() {
+        Physics.leapfrog(this.t + this.dt, this);
+        this.t += this.dt;
     }
     
 });
 
-app = new App();
+var app = new App();
 
 var AppView = Backbone.View.extend({
     // Top-level container
