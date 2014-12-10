@@ -221,7 +221,6 @@ var GameCanvas = Backbone.View.extend({
         planet.handle.on("mouseup", planet.mouseUp);
         planet.handle.on("mousedrag", planet.drag);
         
-        
         this.planetItems.push(planet);
         this.updatePlanets();
     }

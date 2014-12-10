@@ -55,9 +55,9 @@
     <script type="text/javascript" src="js/math.js"></script>    
     <script type="text/javascript" src="js/physics.js"></script>    
 
+    <script type="text/javascript" src="js/utils.js"></script> 
     <script type="text/javascript" src="js/app.js"></script>
     <script type="text/javascript" src="js/draw_graph.js"></script> 
-    <script type="text/javascript" src="js/utils.js"></script> 
 
 
     <script type="text/paperscript" canvas="canvas" src="js/draw.js"></script>
