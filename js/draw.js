@@ -1,3 +1,5 @@
+/* If anyone is reading this code -- please don't think ill of me. I'll clean it later, promise! */
+
 var COLOR_SUN_INNER = 'white';
 var COLOR_SUN_OUTER = 'rgba(255, 254, 181, 1)';
 var COLOR_SUN_OUTER2 = 'rgba(255, 254, 181, 0.8)';
@@ -155,6 +157,7 @@ var GameCanvas = Backbone.View.extend({
 
     updatePlanets: function() {
         var vcenter = this.center;
+        var star = this.star;
 
         for (var i = 0; i < app.nplanets(); i++) {
             var x = app.coords(i+1);
@@ -168,6 +171,18 @@ var GameCanvas = Backbone.View.extend({
             var planet = this.planetItems[i];
             planet.position = center;
             planet.handle.position = center;
+
+            var dx = planet.position.x - star.position.x;
+            var dy = planet.position.y - star.position.y;
+
+            var angle = Math.atan2(dy, dx);
+            var w = planet.bounds.width;
+            
+            planet.fillColor.origin = new Point(planet.position.x - 0.5*w*Math.cos(angle),
+                                                planet.position.y - 0.5*w*Math.sin(angle));
+            planet.fillColor.destination = new Point(planet.position.x + 0.5*w*Math.cos(angle),
+                                                     planet.position.y + 0.5*w*Math.sin(angle));
+
         }
 
     },
@@ -182,6 +197,15 @@ var GameCanvas = Backbone.View.extend({
             fillColor: PLANET_COLOR            
         });
 
+        planet.fillColor = {
+                        gradient: {
+                            stops:[[PLANET_COLOR, 0.], ['black', 0.85]],
+                            radial:true
+                        },
+                        origin: planet.position,
+                        destination: planet.bounds.rightCenter
+        };
+        
         var planetHandle = new Path.Circle({
             center: this.center,
             radius: 10 * PLANET_INFLATE * PLANET_SIZE,

@@ -76,6 +76,8 @@ var App = Backbone.ROComputedModel.extend({
         this.v[n*NPHYS+X] = -v_circ * y/r;
         this.v[n*NPHYS+Y] = v_circ * x/r;        
     },
+
+    ticks:0,
     
     tick: function() {
         if (this.paused)
@@ -91,6 +93,7 @@ var App = Backbone.ROComputedModel.extend({
         var dx = Math.abs(this.x[NPHYS+X]);
 
         if (dx < MAX_DISTANCE && this.x[NPHYS+Y] > 0) {
+            
             this.speed = TRANSITING_SPEED + (1-TRANSITING_SPEED) * Math.pow(dx/MAX_DISTANCE, 2.);
         } else
             this.speed = 1;
@@ -101,8 +104,10 @@ var App = Backbone.ROComputedModel.extend({
                              this.R[0],
                              this.R[1]);
 
-        console.log('Dip:', dip);
-        
+        this.ticks++;
+
+        if (this.ticks % 2 == 0)
+            addData(this.time, dip, '#top-right');
     }
     
 });

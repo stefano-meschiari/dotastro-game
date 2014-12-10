@@ -1,3 +1,5 @@
+
+
 // $(function () {
 //     $(document).ready(function () {
 //         Highcharts.setOptions({
@@ -75,7 +77,59 @@
 //     });
 // });
 
+$(function() {
+    $(document).ready(function() {
+        $("#top-right").highcharts({
+            title: {
+                text: 'Stellar brightness'
+            },
+            chart: {
+                
+            },
+            xAxis: {
+                title: { text: 'Time' }
+            },
+            yAxis: {
+                title: {
+                    text: 'Brightness'
+                },
+                plotLines: [{
+                    value: 0,
+                    width: 1,
+                    color: '#808080'
+                }]
+            },
+            series:  [
+                {
+                    name: 'Brightness',
+                    type: 'line',
+                    marker: {
+                        enabled:false
+                    }
+                }
+                
+            ],
+            legend: {
+                enabled: false
+            },
+            exporting: {
+                enabled: false
+            }
 
+            
+        });
+    });
+});
+
+function addData(x, y, which) {
+    var p = $(which).highcharts();
+    p.series[0].addPoint([x, y]);
+    if (p.series[0].data.length > 250)
+        p.series[0].data[0].remove();
+}
+
+
+/*
 $(function () {
     $(document).ready(function () {
         Highcharts.setOptions({
@@ -254,3 +308,4 @@ $(function () {
         });
     });
 });
+*/

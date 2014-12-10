@@ -49,7 +49,6 @@ function TransitDepthMinScale(starRadius)
 {
     //defines what is the maxDepth we draw -ie, what is 0 on the graph
     var jup = MaxTransitDepth(RJup, starRadius);
-    console.log('jup:', Math.log(jup));
     return Math.log(jup) * Math.pow(starRadius / RSun, -0.3); //scale based on size - big stars have smaller depths!
 }    
 
@@ -64,7 +63,7 @@ function lightCurve (xPos, yPos, zPos, starRadius, planetRadius)
     if (dist > (starRadius + planetRadius))
 	      return 1;
 
-    console.log(starRadius.toExponential(2), planetRadius.toExponential(2));
+//    console.log(starRadius.toExponential(2), planetRadius.toExponential(2));
 
 
     if (dist <= (starRadius - planetRadius))
@@ -74,7 +73,7 @@ function lightCurve (xPos, yPos, zPos, starRadius, planetRadius)
     var d = dist;
     var area = r2*r2*Math.acos( (d*d + r2*r2 - r1*r1)/(2.0*d*r2)) + r1*r1*Math.acos( (d*d + r1*r1 - r2*r2)/(2.0*d*r1))
 			      -0.5*Math.sqrt( (-1.0*d + r1 + r2) * (d - r1 + r2) * (d + r1 - r2) * (d + r1 + r2));
-    console.log('Area:', Math.log(area / Math.PI / starRadius / starRadius));
+//    console.log('Area:', Math.log(area / Math.PI / starRadius / starRadius));
     
     return ScaleLightCurve(area / Math.PI / starRadius / starRadius);
 }
