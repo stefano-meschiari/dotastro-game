@@ -44,3 +44,28 @@ body {
   border:1px solid white;
 }
 
+@keyframes glow {
+  from { color: rgba(0, 0, 0, 0); }
+  to { color:white; }
+}
+
+@-webkit-keyframes glow {
+  from { color: rgba(0, 0, 0, 0); }
+  to { color:white; }
+}
+
+.message {
+  position:absolute;
+  color:white;
+  left:40%;
+  width:60%;
+  text-align:center;
+  padding:30px;
+  font-family:'Unica One';
+  font-size:20px;
+  -webkit-animation: glow 1s infinite;
+  animation: glow 1s infinite;
+  -webkit-animation-direction: alternate;
+  animation-direction: alternate;
+
+}

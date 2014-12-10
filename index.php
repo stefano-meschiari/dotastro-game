@@ -30,6 +30,7 @@
       </div>
       
       <div id="bottom-layer">
+        <div class="message">Tap here!</div>
         <canvas id="canvas" class="full-size" keepalive="true"></canvas>
       </div>
     </div>

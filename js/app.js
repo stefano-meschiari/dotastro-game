@@ -66,6 +66,7 @@ var App = Backbone.ROComputedModel.extend({
         this.M.push(0);
 
         app.trigger('add:planet');
+        $(".message").hide();
     },
 
     movePlanet: function(n, x, y) {
