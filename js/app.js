@@ -1,6 +1,6 @@
 "use strict";
 
-var TRANSITING_SPEED = 0.0075;
+var TRANSITING_SPEED = 0.005;
 
 /* Read-only computed properties. */
 Backbone.ROComputedModel = Backbone.Model.extend({
@@ -74,7 +74,8 @@ var App = Backbone.ROComputedModel.extend({
         this.x[n*NPHYS+X] = x;
         this.x[n*NPHYS+Y] = y;
         this.v[n*NPHYS+X] = -v_circ * y/r;
-        this.v[n*NPHYS+Y] = v_circ * x/r;        
+        this.v[n*NPHYS+Y] = v_circ * x/r;
+        resetData();
     },
 
     ticks:0,

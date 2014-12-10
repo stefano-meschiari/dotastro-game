@@ -23,8 +23,7 @@
 
     <div id="app">
       <div id="top-layer">
-        <div id="top-left">
-          
+        <div id="top-left">          
         </div>
         <div id="top-right">
         </div>

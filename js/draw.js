@@ -52,7 +52,7 @@ var LeftCanvas = Backbone.View.extend({
         var planet = new Path.Circle({
             center: this.center,
             radius: LEFT_ZOOM*PLANET_SIZE,
-            fillColor: PLANET_COLOR            
+            fillColor: 'black'          
         });
 
         this.planetItems.push(planet);
@@ -217,15 +217,17 @@ var GameCanvas = Backbone.View.extend({
 
         planet.mouseDown = function() {
             app.paused = true;
-            console.log('hi');
+            planet.dragging = true;
         };
 
         planet.mouseUp = function() {
             app.paused = false;
+            planet.dragging = false;
         };
         
         planet.drag = function(event) {
-            
+            if (!planet.dragging)
+                return;
             event.position = [event.point.x - center.x, event.point.y - center.y];
         
             if (event.point.x < LEFT_WIDTH)
