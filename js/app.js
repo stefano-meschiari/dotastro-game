@@ -20,7 +20,10 @@ Backbone.ROComputedModel = Backbone.Model.extend({
 // This should eventually go in an external file (json? yaml?)
 var Levels = [
     {
-        starRadius:Units.RSUN
+        starRadius:Units.RSUN,
+        planetRadius:Units.RJUP,
+        planetPeriod:365.25,
+        planetPhase:0
     }
 ];
 
@@ -40,9 +43,11 @@ var App = Backbone.ROComputedModel.extend({
     M: [1],
     paused: false,
     currentLevel: 0,
+    lDt: 0.0005,
     
     initialize: function() {
         window.minDepth = TransitDepthMinScale(Levels[this.currentLevel].starRadius);
+        this.loadLevel();
     },
     
     nplanets: function() {
@@ -55,6 +60,36 @@ var App = Backbone.ROComputedModel.extend({
 
     vels: function(n) {
         return [this.v[n*NPHYS+X], this.v[n*NPHYS+Y], this.v[n*NPHYS+Z]];
+    },
+
+    loadLevel: function() {
+        this.lightCurve = [];
+        var level = Levels[this.currentLevel];
+        this.R[0] = level.starRadius;
+
+        var lDt = this.lDt;
+
+        var a = PeriodToSemiMajorAxis(this.M[0]*Units.MSUN, level.planetPeriod*Units.DAY);
+        var n = 2*Math.PI / level.planetPeriod;
+
+        var t = 0;
+        while (t < level.planetPeriod) {            
+            var th = n * t + level.planetPhase;
+            t += lDt;
+            
+            var x = a * Math.cos(th);
+            var y = a * Math.sin(th);
+
+            
+            var dip = lightCurve(x, y, 0,
+                                 this.R[0],
+                                 level.planetRadius);
+            this.lightCurve.push([t, dip]);
+            if (Math.abs(x) < Units.RSUN && y > 0)
+                console.error(t, dip);
+
+        }
+        
     },
     
     addPlanet: function(x, y) {
@@ -76,7 +111,9 @@ var App = Backbone.ROComputedModel.extend({
         this.x[n*NPHYS+Y] = y;
         this.v[n*NPHYS+X] = -v_circ * y/r;
         this.v[n*NPHYS+Y] = v_circ * x/r;
+        this.t = 0;
         resetData();
+        
     },
 
     ticks:0,
@@ -108,8 +145,9 @@ var App = Backbone.ROComputedModel.extend({
 
         this.ticks++;
 
-        if (this.ticks % 2 == 0)
-            addData(this.time, dip, '#top-right');
+        if (this.ticks % 2 == 0) {
+            addData(this.t, dip, 0);
+        }
     }
     
 });
