@@ -6,6 +6,8 @@ var AUmeters = 1.5e13; //meters
 var RJup = Units.RJUP; //meters
 var RSun = Units.RSUN; //meters
 
+
+
 //keplers third law - neglect planet mass compared to star mass
 function SemiMajorAxisToPeriod(starMass, semiMajorAxis) {
     var a = Math.sqrt(1.0/starMass);
@@ -46,29 +48,34 @@ function MaxTransitDepth( radiusPlanet, radiusStar)
 function TransitDepthMinScale(starRadius)
 {
     //defines what is the maxDepth we draw -ie, what is 0 on the graph
-    var jup = MaxTransitDepth(Rjup, starRadius);
-    return Math.log(jup) * Math.Pow(starRadius / RSun, -0.3); //scale based on size - big stars have smaller depths!
+    var jup = MaxTransitDepth(RJup, starRadius);
+    console.log('jup:', Math.log(jup));
+    return Math.log(jup) * Math.pow(starRadius / RSun, -0.3); //scale based on size - big stars have smaller depths!
 }    
+
 
 
 function lightCurve (xPos, yPos, zPos, starRadius, planetRadius)
 {
-    if (yPos > 0)
-	return 1;
+    if (yPos < 0)
+	      return 1;
     var dist = Math.sqrt(xPos*xPos + zPos*zPos);
+
     if (dist > (starRadius + planetRadius))
-	return 1;
+	      return 1;
+
+    console.log(starRadius.toExponential(2), planetRadius.toExponential(2));
+
 
     if (dist <= (starRadius - planetRadius))
-	return ScaleLightCurve(MaxTransitDepth(planetRadius, starRadius));
-
+	      return ScaleLightCurve(MaxTransitDepth(planetRadius, starRadius));
     var r2 = planetRadius;
     var r1 = starRadius;
     var d = dist;
+    var area = r2*r2*Math.acos( (d*d + r2*r2 - r1*r1)/(2.0*d*r2)) + r1*r1*Math.acos( (d*d + r1*r1 - r2*r2)/(2.0*d*r1))
+			      -0.5*Math.sqrt( (-1.0*d + r1 + r2) * (d - r1 + r2) * (d + r1 - r2) * (d + r1 + r2));
+    console.log('Area:', Math.log(area / Math.PI / starRadius / starRadius));
     
-    var area = r2*r2*Math.acos( (d*d + r2*r2 - r1*r1)/(2.0*d*r2)) + r1*r1*Math.Acos( (d*d + r1*r1 - r2*r2)/(2.0*d*r1))
-			-0.5*Math.Sqrt( (-1.0*d + r1 + r2) * (d - r1 + r2) * (d + r1 - r2) * (d + r1 + r2));
-
     return ScaleLightCurve(area / Math.PI / starRadius / starRadius);
 }
 
@@ -76,11 +83,15 @@ function lightCurve (xPos, yPos, zPos, starRadius, planetRadius)
 function ScaleLightCurve(fractionBlocked)
 {
     //the minimum depth is already computed (minDepth) - that only needs to be computed once per level
-
+    var offSetScale = -6;
     var logFrac = Math.log(fractionBlocked);
-    if (logFrac < minDepth)
+    if (logFrac > minDepth)
 	return -1;
-    return logFrac/minDepth; //in log space, these are both negative values, and with 0 being the max of the graph, simple division does the job
+    if (logFrac < minDepth + offSetScale)
+	return 1.0;
+
+    
+    return (logFrac-minDepth)/offSetScale; //in log space, these are both negative values, and with 0 being the max of the graph, simple division does the job
 }
 
 function CheckLightCurveMatch(per0,rad0,per1,rad1,phase1) {
