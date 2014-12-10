@@ -31,7 +31,7 @@
       </div>
       
       <div id="bottom-layer">
-        <div class="message"><i class="fa fa-hand-o-down"></i> Tap here!</div>
+        <div class="message"><i class="fa fa-hand-o-down"></i> YO! Tap here!</div>
         <canvas id="canvas" class="full-size" keepalive="true"></canvas>
       </div>
     </div>
