@@ -11,6 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, maximum-scale=1.0, minimal-ui">
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" href="css/main.css">
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     
     <script src="bower_components/modernizer/modernizr.js"></script>        
     
@@ -30,7 +31,7 @@
       </div>
       
       <div id="bottom-layer">
-        <div class="message">Tap here!</div>
+        <div class="message"><i class="fa fa-hand-o-down"></i> Tap here!</div>
         <canvas id="canvas" class="full-size" keepalive="true"></canvas>
       </div>
     </div>
