@@ -23,8 +23,13 @@
 
     <div id="app">
       <div id="top-layer">
-        <canvas id="top-canvas" class="full-size" keepalive="true"></canvas>
+        <div id="top-left">
+          
+        </div>
+        <div id="top-right">
+        </div>
       </div>
+      
       <div id="bottom-layer">
         <canvas id="canvas" class="full-size" keepalive="true"></canvas>
       </div>
@@ -50,9 +55,10 @@
     <script type="text/javascript" src="js/physics.js"></script>    
 
     <script type="text/javascript" src="js/app.js"></script>
+    <script type="text/javascript" src="js/draw_graph.js"></script> 
+    <script type="text/javascript" src="js/utils.js"></script> 
 
 
-    <script type="text/paperscript" canvas="top-canvas" src="js/draw_graph.js"></script>
     <script type="text/paperscript" canvas="canvas" src="js/draw.js"></script>
 
   </body>

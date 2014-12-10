@@ -6,10 +6,11 @@ var COLOR_SUN_HALO_INNER = 'rgba(200,200,0,0.5)';
 var COLOR_SUN_HALO_OUTER = 'rgba(200,200,0,0.)';
 
 PIXELS_PER_AU = 100;
-LEFT_ZOOM = 2;
+LEFT_ZOOM = 120;
 STAR_SCALE = 1;
-STAR_SIZE = 40;
-RIGHT_INFLATE = 2;
+STAR_SIZE = PIXELS_PER_AU * Units.RSUN / Units.AU;
+STAR_INFLATE = 50;
+PLANET_INFLATE = 200;
 PLANET_SIZE = STAR_SIZE * Units.RJUP/Units.RSUN;
 PLANET_COLOR = '#34AADC';
 
@@ -65,8 +66,8 @@ var LeftCanvas = Backbone.View.extend({
             var x = app.coords(i+1);
             var v = app.vels(i+1);
             
-            var center = new Point((x[0] * PIXELS_PER_AU),
-                                   (x[2] * PIXELS_PER_AU));
+            var center = new Point((x[0] * LEFT_ZOOM * PIXELS_PER_AU),
+                                   (x[2] * LEFT_ZOOM * PIXELS_PER_AU));
             center.x += vcenter.x;
             center.y += vcenter.y;
             
@@ -108,7 +109,7 @@ var GameCanvas = Backbone.View.extend({
         
         var star = new Path.Circle({
             center: this.center,
-            radius: STAR_SIZE
+            radius: STAR_SIZE * STAR_INFLATE
         });
 
         star.fillColor = {
@@ -177,13 +178,13 @@ var GameCanvas = Backbone.View.extend({
         
         var planet = new Path.Circle({
             center: this.center,
-            radius: RIGHT_INFLATE * PLANET_SIZE,
+            radius: PLANET_SIZE * PLANET_INFLATE,
             fillColor: PLANET_COLOR            
         });
 
         var planetHandle = new Path.Circle({
             center: this.center,
-            radius: 10 * RIGHT_INFLATE * PLANET_SIZE,
+            radius: 10 * PLANET_INFLATE * PLANET_SIZE,
             fillColor: 'rgba(0, 0, 0, 0)'            
         });
 

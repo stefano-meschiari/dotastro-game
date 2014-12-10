@@ -15,6 +15,12 @@ Backbone.ROComputedModel = Backbone.Model.extend({
     }    
 });
 
+// This should eventually go in an external file (json? yaml?)
+var Levels = [
+    {
+        starRadius:RSUN
+    }
+];
 
 
 var App = Backbone.ROComputedModel.extend({
@@ -29,6 +35,11 @@ var App = Backbone.ROComputedModel.extend({
     // all the bodies in the system.
     M: [1],
     paused: false,
+    currentLevel: 0,
+    
+    initialize: function() {
+        minDepth = TransitDepthMinScale(Levels[this.currentLevel].starRadius);
+    },
     
     nplanets: function() {
         return this.M.length-1;
@@ -41,8 +52,6 @@ var App = Backbone.ROComputedModel.extend({
     vels: function(n) {
         return [this.v[n*NPHYS+X], this.v[n*NPHYS+Y], this.v[n*NPHYS+Z]];
     },
-
-    
     
     addPlanet: function(x, y) {
         var r = Math.sqrt(x*x + y*y);
@@ -71,6 +80,13 @@ var App = Backbone.ROComputedModel.extend({
         
         Physics.leapfrog(this.t + this.dt, this);
         this.t += this.dt;
+
+        // Compute light curve
+        var dip = lightCurve(this.x[NPHYS+X], this.y[NPHYS+Y], this.z[NPHYS+Z],
+                             Levels[this.currentLevel])
+        
+        function lightCurve (xPos, yPos, zPos, starRadius, planetRadius)
+        
     }
     
 });

@@ -6,7 +6,7 @@ $(function () {
             }
         });
 
-        $('#top-layer').highcharts({
+        $('#top-right').highcharts({
             chart: {
                 type: 'spline',
                 animation: Highcharts.svg, // don't animate in old IE

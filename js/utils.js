@@ -1,10 +1,10 @@
-var G = 6.67384e-11; //m^3 kg^-1 s^-3
+var G = 6.67384e-8; //m^3 kg^-1 s^-3
 var smaTcoeff = Math.sqrt(4.0 * Math.PI * Math.PI / G);
 var TsmaCoeff = Math.pow(G / 4.0 / Math.PI / Math.PI, 1.0/3.0);
-var MSun = 1.989e30; // kg
-var AUmeters = 149597870700.0; //meters
-var RJup = 69911000.0; //meters
-var RSun = 695800000.0; //meters
+var MSun = 1.989e33; // kg
+var AUmeters = 1.5e13; //meters
+var RJup = Units.RJUP; //meters
+var RSun = Units.RSUN; //meters
 
 //keplers third law - neglect planet mass compared to star mass
 function SemiMajorAxisToPeriod(starMass, semiMajorAxis) {
@@ -72,7 +72,6 @@ function lightCurve (xPos, yPos, zPos, starRadius, planetRadius)
     return ScaleLightCurve(area / Math.PI / starRadius / starRadius);
 }
 
-var minDepth = TransitDepthMinScale(starRadius);
 
 function ScaleLightCurve(fractionBlocked)
 {
@@ -91,5 +90,5 @@ function CheckLightCurveMatch(per0,rad0,per1,rad1,phase1) {
                  ((Math.abs(rad1-rad0)/rad0) <= vlim) &&
                  (phase1 <= plim)) ? 0:1;
 
-    return yesno
+    return yesno;
 }
