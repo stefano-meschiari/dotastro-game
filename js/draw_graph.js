@@ -120,7 +120,9 @@ $(function() {
                 enabled: false
             },
 
-
+            tooltip: {
+                enabled: false
+            }
         });
     });
 });
