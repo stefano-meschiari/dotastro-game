@@ -117,6 +117,7 @@ var App = Backbone.ROComputedModel.extend({
     },
 
     ticks:0,
+    transiting:false,
     
     tick: function() {
         if (this.paused)
@@ -131,22 +132,27 @@ var App = Backbone.ROComputedModel.extend({
         var MAX_DISTANCE = 20*this.R[0]/Units.AU;
         var dx = Math.abs(this.x[NPHYS+X]);
 
-        if (dx < MAX_DISTANCE && this.x[NPHYS+Y] > 0) {
-            
-            this.speed = TRANSITING_SPEED + (1-TRANSITING_SPEED) * Math.pow(dx/MAX_DISTANCE, 2.);
-        } else
-            this.speed = 1;
-        
         // Compute light curve
         var dip = lightCurve(this.x[NPHYS+X]*Units.AU, this.x[NPHYS+Y]*Units.AU,
                              this.x[NPHYS+Z]*Units.AU,
                              this.R[0],
                              this.R[1]);
 
+        if (dx < MAX_DISTANCE && this.x[NPHYS+Y] > 0) {
+            if (!this.transiting)
+                resetData('#top-left');
+            this.transiting = true;
+            addData(this.t, dip, '#top-left');
+            this.speed = TRANSITING_SPEED + (1-TRANSITING_SPEED) * Math.pow(dx/MAX_DISTANCE, 2.);
+        } else {
+            this.speed = 1;
+            this.transiting = false;
+        }
+
         this.ticks++;
 
         if (this.ticks % 2 == 0) {
-            addData(this.t, dip, 0);
+            addData(this.t, dip, '#top-right');
         }
     }
     

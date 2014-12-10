@@ -99,10 +99,6 @@ var GameCanvas = Backbone.View.extend({
                       0.5 * view.bounds.height);
 
 
-        var div = new Path.Line(new Point(LEFT_WIDTH, 0), 
-                                new Point(LEFT_WIDTH, view.bounds.height));
-        div.strokeColor = 'white';
-
         var auCircle = new Path.Circle({
             center: this.center,
             radius: PIXELS_PER_AU,

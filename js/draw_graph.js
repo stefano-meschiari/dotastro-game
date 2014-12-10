@@ -134,19 +134,75 @@ $(function() {
     });
 });
 
+$(function() {
+    $(document).ready(function() {
+        $("#top-left").highcharts({
+            title: {
+                text: 'Stellar brightness'
+            },
+            chart: {
+                animation:false
+            },
+            xAxis: {
+                title: { text: 'Time' }
+            },
+            yAxis: {
+                title: {
+                    text: 'Brightness'
+                },
+                labels: {
+                    enabled:false
+                },
+                plotLines: [{
+                    value: 0,
+                    width: 1,
+                    color: '#808080'
+                }]
+            },
+            series:  [
+                {
+                    animation:false,
+                    name: 'Brightness',
+                    type: 'line',
+                    marker: {
+                        enabled:false
+                    }
+                },                
+                {
+                    animation:false,
+                    name: 'Template',
+                    type: 'line',
+                    marker: {
+                        enabled:false
+                    }
+                }
+            ],
+            legend: {
+                enabled: false
+            },
+            exporting: {
+                enabled: false
+            },
+
+            tooltip: {
+                enabled: false
+            }
+        });
+    });
+});
+
 function addData(x, y, which) {
-    var p = $("#top-right").highcharts();
-    var tspan = 0;
+    var p = $(which).highcharts();
     
-    p.series[which].addPoint([x, y], true, p.series[which].data.length > 500, false);
+    p.series[0].addPoint([x, y], true, p.series[0].data.length > 400, false);
 }
 
 function initLightCurve(lightCurve) {
 //    p.series[1].
 }
 
-function resetData() {
-    var p = $("#top-right").highcharts();
+function resetData(which) {
+    var p = $(which).highcharts();
     p.series[0].remove();
     p.addSeries({
         animation:false,
