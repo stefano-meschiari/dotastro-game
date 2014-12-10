@@ -48,6 +48,7 @@
 
     <script type="text/javascript" src="highcharts/highcharts.js"></script>
     <script type="text/javascript" src="highcharts/exporting.js"></script> 
+    <script type="text/javascript" src="highcharts/dark-unica.js"></script>
     
     <script type="text/javascript" src="js/defines.js"></script>
     <script type="text/javascript" src="js/units.js"></script>    
