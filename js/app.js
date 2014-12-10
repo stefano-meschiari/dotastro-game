@@ -112,7 +112,7 @@ var App = Backbone.ROComputedModel.extend({
         this.v[n*NPHYS+X] = -v_circ * y/r;
         this.v[n*NPHYS+Y] = v_circ * x/r;
         this.t = 0;
-        resetData();
+        resetData('#top-right');
         
     },
 
