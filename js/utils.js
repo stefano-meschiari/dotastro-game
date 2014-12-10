@@ -48,7 +48,7 @@ function MaxTransitDepth( radiusPlanet, radiusStar)
 function TransitDepthMinScale(starRadius)
 {
     //defines what is the maxDepth we draw -ie, what is 0 on the graph
-    var jup = MaxTransitDepth(RJup, starRadius);
+    var jup = MaxTransitDepth(1.5*RJup, starRadius);
     console.log('jup:', Math.log(jup));
     return Math.log(jup) * Math.pow(starRadius / RSun, -0.3); //scale based on size - big stars have smaller depths!
 }    
@@ -64,7 +64,7 @@ function lightCurve (xPos, yPos, zPos, starRadius, planetRadius)
     if (dist > (starRadius + planetRadius))
 	      return 1;
 
-    console.log(starRadius.toExponential(2), planetRadius.toExponential(2));
+    console.log('starRadius and planet radius:', starRadius.toExponential(2), planetRadius.toExponential(2));
 
 
     if (dist <= (starRadius - planetRadius))
@@ -90,7 +90,7 @@ function ScaleLightCurve(fractionBlocked)
     if (logFrac < minDepth + offSetScale)
 	return 1.0;
 
-    
+    console.log('logFrac, minDepth, return: ', logFrac, minDepth, (logFrac-minDepth)/offSetScale);
     return (logFrac-minDepth)/offSetScale; //in log space, these are both negative values, and with 0 being the max of the graph, simple division does the job
 }
 
